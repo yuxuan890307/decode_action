@@ -1,4 +1,4 @@
-//Mon Mar 23 2026 11:17:54 GMT+0000 (Coordinated Universal Time)
+//Mon Mar 23 2026 11:20:55 GMT+0000 (Coordinated Universal Time)
 //Base:<url id="cv1cref6o68qmpt26ol0" type="url" status="parsed" title="GitHub - echo094/decode-js: JS混淆代码的AST分析工具 AST analysis tool for obfuscated JS code" wc="2165">https://github.com/echo094/decode-js</url>
 //Modify:<url id="cv1cref6o68qmpt26olg" type="url" status="parsed" title="GitHub - smallfawn/decode_action: 世界上本来不存在加密，加密的人多了，也便成就了解密" wc="741">https://github.com/smallfawn/decode_action</url>
 const MAX_EXTRA_AD_COUNT = 200,
@@ -45,9 +45,15 @@ async function checkScriptVersion() {
       },
       "timeout": 10000
     }, null, "版本验证请求");
-    if (!_0x23a59d || _0x23a59d.statusCode !== 200 || !_0x25112a) return console.log("⚠️ 版本验证页面请求失败，跳过验证继续执行"), true;
+    if (!_0x23a59d || _0x23a59d.statusCode !== 200 || !_0x25112a) {
+      console.log("⚠️ 版本验证页面请求失败，跳过验证继续执行");
+      return true;
+    }
     const _0x5e4931 = _0x25112a.match(/版本[\d\.]+/);
-    if (!_0x5e4931) return console.log("⚠️ 版本验证页面未找到有效版本信息，跳过验证继续执行"), true;
+    if (!_0x5e4931) {
+      console.log("⚠️ 版本验证页面未找到有效版本信息，跳过验证继续执行");
+      return true;
+    }
     const _0x51ac4b = _0x5e4931[0];
     console.log("🌐 远程版本：" + _0x51ac4b);
     if (_0x51ac4b !== SCRIPT_VERSION) {
@@ -78,7 +84,9 @@ const KSLOW_REWARD_THRESHOLD = getEnvNumber("KSLOW_REWARD_THRESHOLD", 5),
   enableExtraTaskCheck = process.env.ewrw === "1";
 function getTasksToExecute() {
   const _0x28d46b = process.env.Task;
-  if (!_0x28d46b) return ["look", "looks", "food", "foods"];
+  if (!_0x28d46b) {
+    return ["look", "looks", "food", "foods"];
+  }
   const _0x41a81c = _0x28d46b.split(",").map(_0x1fa1d8 => _0x1fa1d8.trim().toLowerCase()).filter(Boolean),
     _0x4c7ee1 = ["content", "contents", "look", "looks", "food", "foods", "box", "boxs"],
     _0x34980d = _0x41a81c.filter(_0x15ca5b => _0x4c7ee1.includes(_0x15ca5b));
@@ -97,20 +105,19 @@ function getAccountConfigsFromEnv() {
     _0x46b5f2.push(..._0x5097c1);
   }
   for (let _0x53b148 = 1; _0x53b148 <= 999; _0x53b148++) {
-    {
-      const _0x9da02a = "ksck" + _0x53b148;
-      if (process.env[_0x9da02a]) {
-        {
-          const _0x4af9b4 = process.env[_0x9da02a],
-            _0x4423e1 = _0x4af9b4.split("&").map(_0xd2b9b0 => _0xd2b9b0.trim()).filter(Boolean);
-          _0x46b5f2.push(..._0x4423e1);
-        }
-      }
+    const _0x9da02a = "ksck" + _0x53b148;
+    if (process.env[_0x9da02a]) {
+      const _0x4af9b4 = process.env[_0x9da02a],
+        _0x4423e1 = _0x4af9b4.split("&").map(_0xd2b9b0 => _0xd2b9b0.trim()).filter(Boolean);
+      _0x46b5f2.push(..._0x4423e1);
     }
   }
   const _0x3e1034 = [];
   for (const _0x5adc88 of _0x46b5f2) {
-    !_0x2bbefb.has(_0x5adc88) && (_0x2bbefb.add(_0x5adc88), _0x3e1034.push(_0x5adc88));
+    if (!_0x2bbefb.has(_0x5adc88)) {
+      _0x2bbefb.add(_0x5adc88);
+      _0x3e1034.push(_0x5adc88);
+    }
   }
   return _0x3e1034;
 }
@@ -126,12 +133,21 @@ async function sendRequest(_0x393336, _0x4ddd59 = null, _0x32b3b6 = "Unknown Req
       "rejectUnauthorized": false
     })
   };
-  if (_0x393336.body) _0x4b0f8c.data = _0x393336.body;else _0x393336.form && (_0x4b0f8c.data = querystring.stringify(_0x393336.form), _0x4b0f8c.headers["Content-Type"] = "application/x-www-form-urlencoded");
-  if (_0x4ddd59) try {
-    _0x4b0f8c.httpsAgent = new SocksProxyAgent(_0x4ddd59);
-    _0x4b0f8c.httpAgent = new SocksProxyAgent(_0x4ddd59);
-  } catch (_0x5cf2d2) {
-    console.log("❌ [错误] " + _0x32b3b6 + " 代理URL无效(" + _0x5cf2d2.message + ")，尝试直连模式");
+  if (_0x393336.body) {
+    _0x4b0f8c.data = _0x393336.body;
+  } else {
+    if (_0x393336.form) {
+      _0x4b0f8c.data = querystring.stringify(_0x393336.form);
+      _0x4b0f8c.headers["Content-Type"] = "application/x-www-form-urlencoded";
+    }
+  }
+  if (_0x4ddd59) {
+    try {
+      _0x4b0f8c.httpsAgent = new SocksProxyAgent(_0x4ddd59);
+      _0x4b0f8c.httpAgent = new SocksProxyAgent(_0x4ddd59);
+    } catch (_0x5cf2d2) {
+      console.log("❌ [错误] " + _0x32b3b6 + " 代理URL无效(" + _0x5cf2d2.message + ")，尝试直连模式");
+    }
   }
   try {
     const _0x1f7c31 = await axios(_0x4b0f8c),
@@ -152,17 +168,17 @@ async function sendRequest(_0x393336, _0x4ddd59 = null, _0x32b3b6 = "Unknown Req
       "body": _0x5c91f5
     };
   } catch (_0xbdb740) {
-    {
-      console.log("❌ [" + _0x32b3b6 + "] 请求异常: " + _0xbdb740.message);
-      if (_0xbdb740.name === "AggregateError" && Array.isArray(_0xbdb740.errors)) return {
-        "response": null,
-        "body": null
-      };
+    console.log("❌ [" + _0x32b3b6 + "] 请求异常: " + _0xbdb740.message);
+    if (_0xbdb740.name === "AggregateError" && Array.isArray(_0xbdb740.errors)) {
       return {
         "response": null,
         "body": null
       };
     }
+    return {
+      "response": null,
+      "body": null
+    };
   }
 }
 async function testProxyConnectivity(_0x266636, _0x2bfdd8 = "代理连通性检测") {
@@ -184,23 +200,27 @@ async function testProxyConnectivity(_0x266636, _0x2bfdd8 = "代理连通性检�
     },
     "timeout": 8000
   }, _0x266636, _0x2bfdd8 + " → ip9.com.cn");
-  if (!_0x46c122) return {
-    "ok": false,
-    "msg": "❌ 无法通过代理访问 ip9.com.cn",
-    "ip": ""
-  };
+  if (!_0x46c122) {
+    return {
+      "ok": false,
+      "msg": "❌ 无法通过代理访问 ip9.com.cn",
+      "ip": ""
+    };
+  }
   let _0x354867 = "";
   if (typeof _0x46c122 === "string") {
     try {
       const _0x146787 = JSON.parse(_0x46c122);
       _0x354867 = _0x146787.ip || _0x146787.IP || _0x146787.addr || _0x146787.ip_address || _0x146787.query || _0x146787.data && _0x146787.data.ip || "";
     } catch {
-      {
-        const _0x2934ec = String(_0x46c122).match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/);
-        _0x354867 = _0x2934ec ? _0x2934ec[0] : "";
-      }
+      const _0x2934ec = String(_0x46c122).match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/);
+      _0x2934ec ? _0x354867 = _0x2934ec[0] : _0x354867 = "";
     }
-  } else _0x46c122 && typeof _0x46c122 === "object" && (_0x354867 = _0x46c122.ip || _0x46c122.IP || _0x46c122.addr || _0x46c122.ip_address || _0x46c122.query || _0x46c122.data && _0x46c122.data.ip || "");
+  } else {
+    if (_0x46c122 && typeof _0x46c122 === "object") {
+      _0x354867 = _0x46c122.ip || _0x46c122.IP || _0x46c122.addr || _0x46c122.ip_address || _0x46c122.query || _0x46c122.data && _0x46c122.data.ip || "";
+    }
+  }
   return {
     "ok": true,
     "msg": "✅ SOCKS5代理正常，出口IP: " + (_0x354867 || "未知"),
@@ -225,11 +245,13 @@ async function getNickname(_0x4712b6, _0x5eee46, _0x574293 = "?") {
       },
       "timeout": 12000
     }, _0x5eee46, "账号[" + _0x574293 + "] 获取昵称");
-  if (_0x2eea28 && _0x2eea28.result === 1 && _0x2eea28.data) return {
-    "nickname": _0x2eea28.data.userData?.["nickname"] || null,
-    "totalCoin": _0x2eea28.data.totalCoin ?? null,
-    "totalCash": _0x2eea28.data.totalCash ?? null
-  };
+  if (_0x2eea28 && _0x2eea28.result === 1 && _0x2eea28.data) {
+    return {
+      "nickname": _0x2eea28.data.userData?.["nickname"] || null,
+      "totalCoin": _0x2eea28.data.totalCoin ?? null,
+      "totalCash": _0x2eea28.data.totalCash ?? null
+    };
+  }
   return null;
 }
 async function getAccountBasicInfo(_0x27d182, _0x32190c, _0x1e29c7 = "?") {
@@ -249,16 +271,20 @@ async function getAccountBasicInfo(_0x27d182, _0x32190c, _0x1e29c7 = "?") {
       },
       "timeout": 12000
     }, _0x32190c, "账号[" + _0x1e29c7 + "] 获取基本信息");
-  if (_0x251092 && _0x251092.result === 1 && _0x251092.data) return {
-    "nickname": _0x251092.data.userData?.["nickname"] || _0x1e29c7,
-    "totalCoin": _0x251092.data.coinAmount ?? null,
-    "allCash": _0x251092.data.cashAmountDisplay ?? null
-  };
+  if (_0x251092 && _0x251092.result === 1 && _0x251092.data) {
+    return {
+      "nickname": _0x251092.data.userData?.["nickname"] || _0x1e29c7,
+      "totalCoin": _0x251092.data.coinAmount ?? null,
+      "allCash": _0x251092.data.cashAmountDisplay ?? null
+    };
+  }
   return null;
 }
 function centerAlign(_0x93e46f, _0x2f1069) {
   _0x93e46f = String(_0x93e46f);
-  if (_0x93e46f.length >= _0x2f1069) return _0x93e46f.substring(0, _0x2f1069);
+  if (_0x93e46f.length >= _0x2f1069) {
+    return _0x93e46f.substring(0, _0x2f1069);
+  }
   const _0x5de9e2 = _0x2f1069 - _0x93e46f.length,
     _0x54de7f = Math.floor(_0x5de9e2 / 2),
     _0x5cdc44 = _0x5de9e2 - _0x54de7f;
@@ -278,18 +304,20 @@ async function simulateAdWatch(_0x52d1a7) {
   console.log("👀 预计奖励" + _0x52d1a7 + "金币，" + generateRandomInteractionMessage() + " " + _0x55ea96 + "秒");
   let _0x3beb21 = 0;
   while (_0x3beb21 < _0x55ea96 * 1000) {
-    {
-      const _0x572646 = Math.floor(Math.random() * 5) + 5,
-        _0x2cb67c = Math.min(_0x3beb21 + _0x572646 * 1000, _0x55ea96 * 1000),
-        _0x1cac8a = _0x2cb67c - _0x3beb21;
-      await new Promise(_0xbe2a69 => setTimeout(_0xbe2a69, _0x1cac8a));
-      _0x3beb21 = _0x2cb67c;
-      _0x3beb21 < _0x55ea96 * 1000 && console.log("   模拟点击屏幕空白处");
+    const _0x572646 = Math.floor(Math.random() * 5) + 5,
+      _0x2cb67c = Math.min(_0x3beb21 + _0x572646 * 1000, _0x55ea96 * 1000),
+      _0x1cac8a = _0x2cb67c - _0x3beb21;
+    await new Promise(_0xbe2a69 => setTimeout(_0xbe2a69, _0x1cac8a));
+    _0x3beb21 = _0x2cb67c;
+    if (_0x3beb21 < _0x55ea96 * 1000) {
+      console.log("   模拟点击屏幕空白处");
     }
   }
 }
 async function simulateAdClick(_0x528aae) {
-  if (!_0x528aae.adUrl || _0x528aae.estimatedReward < 30) return;
+  if (!_0x528aae.adUrl || _0x528aae.estimatedReward < 30) {
+    return;
+  }
   console.log("🎯 高价值广告，模拟点击广告按钮...");
   await new Promise(_0x5ef9d2 => setTimeout(_0x5ef9d2, (Math.floor(Math.random() * 3) + 2) * 1000));
   console.log("🔗 模拟访问广告落地页...");
@@ -499,14 +527,16 @@ class KuaishouAdTask {
         "taskType": 2
       }
     };
-    this.taskConfigs = this.isKuaishouOfficial ? this.taskConfigsOfficial : this.taskConfigsNebula;
+    this.isKuaishouOfficial ? this.taskConfigs = this.taskConfigsOfficial : this.taskConfigs = this.taskConfigsNebula;
     this.taskStats = {};
     tasksToExecute.forEach(_0x40c949 => {
-      this.taskConfigs[_0x40c949] && (this.taskStats[_0x40c949] = {
-        "success": 0,
-        "failed": 0,
-        "totalReward": 0
-      });
+      if (this.taskConfigs[_0x40c949]) {
+        this.taskStats[_0x40c949] = {
+          "success": 0,
+          "failed": 0,
+          "totalReward": 0
+        };
+      }
     });
     this.lowRewardStreak = 0;
     this.lowRewardThreshold = KSLOW_REWARD_THRESHOLD;
@@ -523,22 +553,18 @@ class KuaishouAdTask {
   }
   async ["checkCoinLimit"]() {
     try {
-      {
-        const _0x24cbb9 = await getAccountBasicInfo(this.cookie, this.proxyUrl, this.index);
-        if (_0x24cbb9 && _0x24cbb9.totalCoin) {
-          const _0x25711e = parseInt(_0x24cbb9.totalCoin);
-          if (_0x25711e >= this.coinLimit) {
-            {
-              console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 金币已达 " + _0x25711e + "，超过 " + this.coinLimit + " 阈值，停止任务");
-              this.coinExceeded = true;
-              this.stopAllTasks = true;
-              this.stopExtraTasks = true;
-              return true;
-            }
-          }
+      const _0x24cbb9 = await getAccountBasicInfo(this.cookie, this.proxyUrl, this.index);
+      if (_0x24cbb9 && _0x24cbb9.totalCoin) {
+        const _0x25711e = parseInt(_0x24cbb9.totalCoin);
+        if (_0x25711e >= this.coinLimit) {
+          console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 金币已达 " + _0x25711e + "，超过 " + this.coinLimit + " 阈值，停止任务");
+          this.coinExceeded = true;
+          this.stopAllTasks = true;
+          this.stopExtraTasks = true;
+          return true;
         }
-        return false;
       }
+      return false;
     } catch (_0x5483a9) {
       console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 金币检查异常: " + _0x5483a9.message);
       return false;
@@ -552,12 +578,12 @@ class KuaishouAdTask {
         _0x3161ea = this.cookie.match(/kuaishou\.api_st=([^;]+)/),
         _0x18a306 = this.cookie.match(/kpn=([^;]+)/),
         _0xd86d5d = this.cookie.match(/earphoneMode=([^;]+)/);
-      this.egid = _0x45ac7e ? _0x45ac7e[1] : "";
-      this.did = _0x30fdf2 ? _0x30fdf2[1] : "";
-      this.userId = _0x175e78 ? _0x175e78[1] : "";
-      this.kuaishouApiSt = _0x3161ea ? _0x3161ea[1] : "";
-      this.kpn = _0x18a306 ? _0x18a306[1] : "KUAISHOU";
-      this.earphoneMode = _0xd86d5d ? _0xd86d5d[1] : "1";
+      _0x45ac7e ? this.egid = _0x45ac7e[1] : this.egid = "";
+      _0x30fdf2 ? this.did = _0x30fdf2[1] : this.did = "";
+      _0x175e78 ? this.userId = _0x175e78[1] : this.userId = "";
+      _0x3161ea ? this.kuaishouApiSt = _0x3161ea[1] : this.kuaishouApiSt = "";
+      _0x18a306 ? this.kpn = _0x18a306[1] : this.kpn = "KUAISHOU";
+      _0xd86d5d ? this.earphoneMode = _0xd86d5d[1] : this.earphoneMode = "1";
       this.mod = FIXED_DEVICE_CONFIG.model;
       this.sys = FIXED_DEVICE_CONFIG.android.sys;
       this.androidApiLevel = FIXED_DEVICE_CONFIG.android.apiLevel;
@@ -567,14 +593,16 @@ class KuaishouAdTask {
       this.kcv = FIXED_DEVICE_CONFIG.kcv;
       this.boardPlatform = FIXED_DEVICE_CONFIG.boardPlatform;
       this.isKuaishouOfficial = this.kpn === "KUAISHOU";
-      this.versionLabel = this.isKuaishouOfficial ? "普通" : "极速";
+      this.isKuaishouOfficial ? this.versionLabel = "普通" : this.versionLabel = "极速";
       this.appver = "13.9.10.10684";
-      this.signServiceUrl = this.isKuaishouOfficial ? "http://111.170.14.34:16668" : "http://111.170.14.34:16667";
-      this.clientKey = this.isKuaishouOfficial ? "3c2cd3f3" : "2ac2a76d";
-      this.appId = this.isKuaishouOfficial ? "kuaishou" : "kuaishou_nebula";
-      this.appName = this.isKuaishouOfficial ? "快手" : "快手极速版";
-      this.packageName = this.isKuaishouOfficial ? "com.smile.gifmaker" : "com.kuaishou.nebula";
-      (!this.egid || !this.did) && console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " cookie无egid/did，继续尝试执行");
+      this.isKuaishouOfficial ? this.signServiceUrl = "http://111.170.14.34:16668" : this.signServiceUrl = "http://111.170.14.34:16667";
+      this.isKuaishouOfficial ? this.clientKey = "3c2cd3f3" : this.clientKey = "2ac2a76d";
+      this.isKuaishouOfficial ? this.appId = "kuaishou" : this.appId = "kuaishou_nebula";
+      this.isKuaishouOfficial ? this.appName = "快手" : this.appName = "快手极速版";
+      this.isKuaishouOfficial ? this.packageName = "com.smile.gifmaker" : this.packageName = "com.kuaishou.nebula";
+      if (!this.egid || !this.did) {
+        console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " cookie无egid/did，继续尝试执行");
+      }
     } catch (_0x29fd23) {
       console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 解析cookie失败: " + _0x29fd23.message);
     }
@@ -594,16 +622,18 @@ class KuaishouAdTask {
     let _0x225db3 = 0,
       _0x1b314e = null;
     while (_0x225db3 < _0x581bba) {
-      {
-        try {
-          const _0x397caf = await _0x3059e9();
-          if (_0x397caf) return _0x397caf;
-          _0x1b314e = new Error(_0x511b33 + " 返回空结果");
-        } catch (_0x2bdba6) {
-          _0x1b314e = _0x2bdba6;
+      try {
+        const _0x397caf = await _0x3059e9();
+        if (_0x397caf) {
+          return _0x397caf;
         }
-        _0x225db3++;
-        _0x225db3 < _0x581bba && (await new Promise(_0x25a42c => setTimeout(_0x25a42c, _0x38ce21)));
+        _0x1b314e = new Error(_0x511b33 + " 返回空结果");
+      } catch (_0x2bdba6) {
+        _0x1b314e = _0x2bdba6;
+      }
+      _0x225db3++;
+      if (_0x225db3 < _0x581bba) {
+        await new Promise(_0x25a42c => setTimeout(_0x25a42c, _0x38ce21));
       }
     }
     console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " " + _0x511b33 + " 失败");
@@ -611,173 +641,192 @@ class KuaishouAdTask {
   }
   async ["getAdInfo"](_0x3be9ab, _0x59fbbd) {
     try {
-      {
-        const _0x186e56 = "/rest/e/reward/mixed/ad",
-          _0x39d28e = {
-            "encData": "|encData|",
-            "sign": "|sign|",
-            "cs": "false",
-            "client_key": this.clientKey,
-            "videoModelCrowdTag": "1_23",
-            "os": "android",
-            "kuaishou.api_st": this.kuaishouApiSt,
-            "uQaTag": "1##swLdgl:99#ecPp:-9#cmNt:-0#cmHs:-3#cmMnsl:-0"
+      const _0x186e56 = "/rest/e/reward/mixed/ad",
+        _0x39d28e = {
+          "encData": "|encData|",
+          "sign": "|sign|",
+          "cs": "false",
+          "client_key": this.clientKey,
+          "videoModelCrowdTag": "1_23",
+          "os": "android",
+          "kuaishou.api_st": this.kuaishouApiSt,
+          "uQaTag": "1##swLdgl:99#ecPp:-9#cmNt:-0#cmHs:-3#cmMnsl:-0"
+        },
+        _0x3c93ef = {
+          "earphoneMode": this.earphoneMode,
+          "mod": this.mod,
+          "appver": this.appver,
+          "isp": "CUCC",
+          "language": "zh-cn",
+          "ud": this.userId,
+          "did_tag": "0",
+          "net": this.net,
+          "kcv": this.kcv,
+          "app": "0",
+          "kpf": "ANDROID_PHONE",
+          "ver": "11.6",
+          "android_os": "0",
+          "boardPlatform": this.boardPlatform,
+          "kpn": this.kpn,
+          "androidApiLevel": this.androidApiLevel,
+          "country_code": "cn",
+          "sys": this.sys,
+          "sw": this.sw,
+          "sh": this.sh,
+          "abi": "arm64",
+          "userRecoBit": "0"
+        },
+        _0x4453e2 = {
+          "appInfo": {
+            "appId": this.appId,
+            "name": this.appName,
+            "packageName": this.packageName,
+            "version": this.appver,
+            "versionCode": -1
           },
-          _0x3c93ef = {
-            "earphoneMode": this.earphoneMode,
-            "mod": this.mod,
-            "appver": this.appver,
-            "isp": "CUCC",
-            "language": "zh-cn",
-            "ud": this.userId,
-            "did_tag": "0",
-            "net": this.net,
-            "kcv": this.kcv,
-            "app": "0",
-            "kpf": "ANDROID_PHONE",
-            "ver": "11.6",
-            "android_os": "0",
-            "boardPlatform": this.boardPlatform,
-            "kpn": this.kpn,
-            "androidApiLevel": this.androidApiLevel,
-            "country_code": "cn",
-            "sys": this.sys,
-            "sw": this.sw,
-            "sh": this.sh,
-            "abi": "arm64",
-            "userRecoBit": "0"
+          "deviceInfo": {
+            "osType": 1,
+            "osVersion": this.sys.replace("ANDROID_", ""),
+            "deviceId": this.did,
+            "screenSize": {
+              "width": parseInt(this.sw) || 1080,
+              "height": parseInt(this.sh) || 2249
+            },
+            "ftt": ""
           },
-          _0x4453e2 = {
-            "appInfo": {
-              "appId": this.appId,
-              "name": this.appName,
-              "packageName": this.packageName,
-              "version": this.appver,
-              "versionCode": -1
-            },
-            "deviceInfo": {
-              "osType": 1,
-              "osVersion": this.sys.replace("ANDROID_", ""),
-              "deviceId": this.did,
-              "screenSize": {
-                "width": parseInt(this.sw) || 1080,
-                "height": parseInt(this.sh) || 2249
-              },
-              "ftt": ""
-            },
-            "userInfo": {
-              "userId": this.userId,
-              "age": 0,
-              "gender": ""
-            },
-            "impInfo": [{
-              "pageId": _0x59fbbd.pageId || 100011251,
-              "subPageId": _0x59fbbd.subPageId,
-              "action": 0,
-              "browseType": 3,
-              "impExtData": "{}",
-              "mediaExtData": "{}"
-            }]
+          "userInfo": {
+            "userId": this.userId,
+            "age": 0,
+            "gender": ""
           },
-          _0x3cc37f = Buffer.from(JSON.stringify(_0x4453e2)).toString("base64");
-        let _0x1f2797 = await this.getSign(_0x3cc37f);
-        if (!_0x1f2797) return console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " getSign失败，无法获取" + _0x59fbbd.name), null;
-        _0x39d28e.encData = _0x1f2797.encdata;
-        _0x39d28e.sign = _0x1f2797.sign;
-        let _0x28622b = await this.requestSignService({
-          "urlpath": _0x186e56,
-          "reqdata": querystring.stringify(_0x39d28e) + "&" + querystring.stringify(_0x3c93ef),
-          "api_client_salt": this.salt
-        });
-        if (!_0x28622b) return console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " requestSignService失败，无法获取" + _0x59fbbd.name), null;
-        _0x28622b.kaw && _0x28622b.kas && (this.headers.kaw = _0x28622b.kaw, this.headers.kas = _0x28622b.kas);
-        const _0x211d95 = {
-            ..._0x3c93ef,
-            "sig": _0x28622b.sig,
-            "__NS_sig3": _0x28622b.nssig3,
-            "__NS_xfalcon": _0x28622b.xfalcon,
-            "__NStokensig": _0x28622b.nstokensig
+          "impInfo": [{
+            "pageId": _0x59fbbd.pageId || 100011251,
+            "subPageId": _0x59fbbd.subPageId,
+            "action": 0,
+            "browseType": 3,
+            "impExtData": "{}",
+            "mediaExtData": "{}"
+          }]
+        },
+        _0x3cc37f = Buffer.from(JSON.stringify(_0x4453e2)).toString("base64");
+      let _0x1f2797 = await this.getSign(_0x3cc37f);
+      if (!_0x1f2797) {
+        console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " getSign失败，无法获取" + _0x59fbbd.name);
+        return null;
+      }
+      _0x39d28e.encData = _0x1f2797.encdata;
+      _0x39d28e.sign = _0x1f2797.sign;
+      let _0x28622b = await this.requestSignService({
+        "urlpath": _0x186e56,
+        "reqdata": querystring.stringify(_0x39d28e) + "&" + querystring.stringify(_0x3c93ef),
+        "api_client_salt": this.salt
+      });
+      if (!_0x28622b) {
+        console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " requestSignService失败，无法获取" + _0x59fbbd.name);
+        return null;
+      }
+      if (_0x28622b.kaw && _0x28622b.kas) {
+        this.headers.kaw = _0x28622b.kaw;
+        this.headers.kas = _0x28622b.kas;
+      }
+      const _0x211d95 = {
+          ..._0x3c93ef,
+          "sig": _0x28622b.sig,
+          "__NS_sig3": _0x28622b.nssig3,
+          "__NS_xfalcon": _0x28622b.xfalcon,
+          "__NStokensig": _0x28622b.nstokensig
+        },
+        _0x3b2c68 = "https://api.e.kuaishou.com" + _0x186e56 + "?" + querystring.stringify(_0x211d95),
+        {
+          response: _0x5de352,
+          body: _0x343e98
+        } = await sendRequest({
+          "method": "POST",
+          "url": _0x3b2c68,
+          "headers": {
+            "Host": "api.e.kuaishou.com",
+            "Accept-Language": "zh-cn",
+            "X-REQUESTID": generateLegacy(),
+            "User-Agent": FIXED_DEVICE_CONFIG.ua,
+            "Cookie": "kuaishou_api_st=" + this.kuaishouApiSt
           },
-          _0x3b2c68 = "https://api.e.kuaishou.com" + _0x186e56 + "?" + querystring.stringify(_0x211d95),
-          {
-            response: _0x5de352,
-            body: _0x343e98
-          } = await sendRequest({
-            "method": "POST",
-            "url": _0x3b2c68,
-            "headers": {
-              "Host": "api.e.kuaishou.com",
-              "Accept-Language": "zh-cn",
-              "X-REQUESTID": generateLegacy(),
-              "User-Agent": FIXED_DEVICE_CONFIG.ua,
-              "Cookie": "kuaishou_api_st=" + this.kuaishouApiSt
-            },
-            "form": _0x39d28e,
-            "timeout": 15000
-          }, this.proxyUrl, "[" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 获取广告");
-        if (!_0x343e98) return null;
-        if (_0x343e98.errorMsg === "OK" && _0x343e98.feeds && _0x343e98.feeds[0] && _0x343e98.feeds[0].ad) {
-          const _0x59989c = _0x343e98.feeds[0].caption || _0x343e98.feeds[0].ad?.["caption"] || "";
-          if (_0x59989c) {
-            console.log("✅ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 成功获取到广告信息：" + _0x59989c);
+          "form": _0x39d28e,
+          "timeout": 15000
+        }, this.proxyUrl, "[" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 获取广告");
+      if (!_0x343e98) {
+        return null;
+      }
+      if (_0x343e98.errorMsg === "OK" && _0x343e98.feeds && _0x343e98.feeds[0] && _0x343e98.feeds[0].ad) {
+        const _0x59989c = _0x343e98.feeds[0].caption || _0x343e98.feeds[0].ad?.["caption"] || "";
+        if (_0x59989c) {
+          console.log("✅ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 成功获取到广告信息：" + _0x59989c);
+        }
+        const _0x12253c = _0x343e98.feeds[0].exp_tag || "",
+          _0x571c48 = _0x12253c.split("/")[1]?.["split"]("_")?.[0] || "",
+          _0x550c2d = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspirePersonalize"];
+        let _0x397b9a = 0,
+          _0x1ee3ba = 0;
+        const _0x3e34c5 = _0x343e98.feeds[0].ad?.["extData"] || "{}";
+        try {
+          const _0x1b6ed7 = JSON.parse(_0x3e34c5);
+          _0x1ee3ba = _0x1b6ed7.awardCoin;
+        } catch (_0x11c9cf) {
+          _0x1ee3ba = 0;
+        }
+        if (_0x1ee3ba && _0x1ee3ba !== "" && _0x1ee3ba !== 0) {
+          _0x397b9a = _0x1ee3ba;
+        } else {
+          if (_0x550c2d?.["neoValue"] && _0x550c2d.neoValue !== "" && _0x550c2d.neoValue !== 0) {
+            _0x397b9a = _0x550c2d.neoValue;
+          } else {
+            if (_0x550c2d?.["awardValue"] && _0x550c2d.awardValue !== "" && _0x550c2d.awardValue !== 0) {
+              _0x397b9a = _0x550c2d.awardValue;
+            }
           }
-          const _0x12253c = _0x343e98.feeds[0].exp_tag || "",
-            _0x571c48 = _0x12253c.split("/")[1]?.["split"]("_")?.[0] || "",
-            _0x550c2d = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspirePersonalize"];
-          let _0x397b9a = 0,
-            _0x1ee3ba = 0;
-          const _0x3e34c5 = _0x343e98.feeds[0].ad?.["extData"] || "{}";
-          try {
-            const _0x1b6ed7 = JSON.parse(_0x3e34c5);
-            _0x1ee3ba = _0x1b6ed7.awardCoin;
-          } catch (_0x11c9cf) {
-            _0x1ee3ba = 0;
-          }
-          if (_0x1ee3ba && _0x1ee3ba !== "" && _0x1ee3ba !== 0) _0x397b9a = _0x1ee3ba;else {
-            if (_0x550c2d?.["neoValue"] && _0x550c2d.neoValue !== "" && _0x550c2d.neoValue !== 0) _0x397b9a = _0x550c2d.neoValue;else _0x550c2d?.["awardValue"] && _0x550c2d.awardValue !== "" && _0x550c2d.awardValue !== 0 && (_0x397b9a = _0x550c2d.awardValue);
-          }
-          const _0x120d27 = _0x343e98.feeds[0].ad?.["adDataV2"]?.["deepRewardedInfo"],
-            _0x4d32cc = _0x120d27?.["adlessWithPopWindow"] === true,
-            _0xc1afd = _0x4d32cc ? parseInt(_0x120d27?.["deepRewardedCoin"] || "0", 10) : 0;
-          let _0x584e84 = 0,
-            _0xed350e = "",
-            _0x46ed94 = 1;
-          const _0x91e4ff = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspireAdInfo"]?.["inspireAdBillTime"] || 0,
-            _0x5e4da4 = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspireAdInfo"]?.["adExtInfo"] || "";
-          try {
-            const _0x44ae66 = JSON.parse(_0x343e98.feeds[0].ad?.["extData"] || "{}");
-            _0x584e84 = _0x44ae66.inspireTaskId || 0;
-            _0xed350e = _0x44ae66.inspireSessionId || "";
-            _0x46ed94 = _0x44ae66.requestSceneType || 1;
-          } catch (_0x27cda9) {}
-          const _0x4c0634 = _0x343e98.feeds[0].ad?.["url"] || "",
-            _0x33af09 = _0x343e98.feeds[0].ad?.["packageName"] || "",
-            _0x1515a4 = _0x343e98.feeds[0].ad?.["appName"] || "",
-            _0x35302b = _0x33af09 && _0x1515a4 && _0x1515a4.toLowerCase().includes(".apk");
-          _0x59fbbd.taskType === 1 && (this.sessionStore[_0x3be9ab] = {
+        }
+        const _0x120d27 = _0x343e98.feeds[0].ad?.["adDataV2"]?.["deepRewardedInfo"],
+          _0x4d32cc = _0x120d27?.["adlessWithPopWindow"] === true,
+          _0xc1afd = _0x4d32cc ? parseInt(_0x120d27?.["deepRewardedCoin"] || "0", 10) : 0;
+        let _0x584e84 = 0,
+          _0xed350e = "",
+          _0x46ed94 = 1;
+        const _0x91e4ff = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspireAdInfo"]?.["inspireAdBillTime"] || 0,
+          _0x5e4da4 = _0x343e98.feeds[0].ad?.["adDataV2"]?.["inspireAdInfo"]?.["adExtInfo"] || "";
+        try {
+          const _0x44ae66 = JSON.parse(_0x343e98.feeds[0].ad?.["extData"] || "{}");
+          _0x584e84 = _0x44ae66.inspireTaskId || 0;
+          _0xed350e = _0x44ae66.inspireSessionId || "";
+          _0x46ed94 = _0x44ae66.requestSceneType || 1;
+        } catch (_0x27cda9) {}
+        const _0x4c0634 = _0x343e98.feeds[0].ad?.["url"] || "",
+          _0x33af09 = _0x343e98.feeds[0].ad?.["packageName"] || "",
+          _0x1515a4 = _0x343e98.feeds[0].ad?.["appName"] || "",
+          _0x35302b = _0x33af09 && _0x1515a4 && _0x1515a4.toLowerCase().includes(".apk");
+        if (_0x59fbbd.taskType === 1) {
+          this.sessionStore[_0x3be9ab] = {
             "sessionId": _0xed350e,
             "startTime": Date.now(),
             "normalAdBillTime": _0x91e4ff
-          });
-          return {
-            "cid": _0x343e98.feeds[0].ad.creativeId,
-            "llsid": _0x571c48,
-            "estimatedReward": _0x397b9a,
-            "hasExtraTask": _0x4d32cc,
-            "extraReward": _0xc1afd,
-            "inspireTaskId": _0x584e84,
-            "inspireSessionId": _0xed350e,
-            "requestSceneType": _0x46ed94,
-            "inspireAdBillTime": _0x91e4ff,
-            "adExtInfo": _0x5e4da4,
-            "adUrl": _0x4c0634,
-            "packageName": _0x33af09,
-            "appName": _0x1515a4,
-            "isApkDownload": _0x35302b
           };
         }
-        return null;
+        return {
+          "cid": _0x343e98.feeds[0].ad.creativeId,
+          "llsid": _0x571c48,
+          "estimatedReward": _0x397b9a,
+          "hasExtraTask": _0x4d32cc,
+          "extraReward": _0xc1afd,
+          "inspireTaskId": _0x584e84,
+          "inspireSessionId": _0xed350e,
+          "requestSceneType": _0x46ed94,
+          "inspireAdBillTime": _0x91e4ff,
+          "adExtInfo": _0x5e4da4,
+          "adUrl": _0x4c0634,
+          "packageName": _0x33af09,
+          "appName": _0x1515a4,
+          "isApkDownload": _0x35302b
+        };
       }
+      return null;
     } catch (_0x2f3868) {
       console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 获取广告异常: " + _0x2f3868.message);
       return null;
@@ -791,7 +840,10 @@ class KuaishouAdTask {
       if (_0x27047c) {
         const _0x57741a = this.extraToNormalMap[_0x11690a],
           _0x231852 = this.sessionStore[_0x57741a];
-        if (!_0x231852) return console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 未找到" + _0x57741a + "的会话信息"), null;
+        if (!_0x231852) {
+          console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 未找到" + _0x57741a + "的会话信息");
+          return null;
+        }
         _0x55da3b = _0x231852.sessionId;
         _0x561684 = _0x231852.startTime;
         _0x5be469 = _0x561684 + _0x231852.normalAdBillTime + _0x403ee4.inspireAdBillTime;
@@ -833,8 +885,13 @@ class KuaishouAdTask {
           "reqdata": _0x33c011,
           "api_client_salt": this.salt
         }, "[" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 生成报告签名");
-      if (!_0x47a845) return null;
-      _0x47a845.kaw && _0x47a845.kas && (this.headers.kaw = _0x47a845.kaw, this.headers.kas = _0x47a845.kas);
+      if (!_0x47a845) {
+        return null;
+      }
+      if (_0x47a845.kaw && _0x47a845.kas) {
+        this.headers.kaw = _0x47a845.kaw;
+        this.headers.kas = _0x47a845.kas;
+      }
       return {
         "sig": _0x47a845.sig,
         "nssig3": _0x47a845.nssig3,
@@ -867,32 +924,47 @@ class KuaishouAdTask {
           "body": _0x1f6ff1,
           "timeout": 15000
         }, this.proxyUrl, "[" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 提交任务");
-      if (!_0x5788ba) return {
-        "success": false,
-        "reward": 0
-      };
+      if (!_0x5788ba) {
+        return {
+          "success": false,
+          "reward": 0
+        };
+      }
       if (_0x5788ba.result === 1 || _0x5788ba.result === 500) {
         const _0x37f89c = _0x5788ba.data?.["neoAmount"] || 0;
         this.totalReward += _0x37f89c;
         const _0x1bec74 = "💰 [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " " + _0x3d0b49.name + "获得" + _0x37f89c + "金币奖励！累计获得" + this.totalReward + "金币";
         console.log(_0x1bec74);
-        _0x511e6e.endsWith("s") && (this.extraAdExecutedCount++, console.log("📊 追加广告进度：" + this.extraAdExecutedCount + "/" + this.maxExtraAdCount + " 个"), this.extraAdExecutedCount >= this.maxExtraAdCount && (console.log("✅ 追加广告已达到" + this.maxExtraAdCount + "个上限，停止追加任务"), this.stopExtraTasks = true));
+        if (_0x511e6e.endsWith("s")) {
+          this.extraAdExecutedCount++;
+          console.log("📊 追加广告进度：" + this.extraAdExecutedCount + "/" + this.maxExtraAdCount + " 个");
+          this.extraAdExecutedCount >= this.maxExtraAdCount && (console.log("✅ 追加广告已达到" + this.maxExtraAdCount + "个上限，停止追加任务"), this.stopExtraTasks = true);
+        }
         if (_0x37f89c <= this.lowRewardThreshold) {
-          {
-            this.lowRewardStreak++;
-            enableDidChange == 1 && (this.did = generateKuaishouDid());
-            if (_0x37f89c <= 1) {
-              {
-                if (_0x511e6e.endsWith("s")) this.extraTaskKeys = this.extraTaskKeys.filter(_0x3fa10a => _0x3fa10a !== _0x511e6e), console.log("⚠️ 追加任务" + this.taskConfigs[_0x511e6e].name + "奖励过低，移除执行列表");else {
-                  this.normalTaskKeys = this.normalTaskKeys.filter(_0x470a2e => _0x470a2e !== _0x511e6e);
-                  console.log("⚠️ 主任务" + this.taskConfigs[_0x511e6e].name + "奖励过低，移除执行列表");
-                }
-                this.normalTaskKeys.length + this.extraTaskKeys.length <= 0 && (this.stopAllTasks = true);
-              }
-            }
-            this.lowRewardStreak >= this.lowRewardLimit && (console.log("🏁 连续" + this.lowRewardLimit + "次低奖励，停止全部任务"), this.stopAllTasks = true, this.stopExtraTasks = true);
+          this.lowRewardStreak++;
+          if (enableDidChange == 1) {
+            this.did = generateKuaishouDid();
           }
-        } else this.lowRewardStreak = 0;
+          if (_0x37f89c <= 1) {
+            if (_0x511e6e.endsWith("s")) {
+              this.extraTaskKeys = this.extraTaskKeys.filter(_0x3fa10a => _0x3fa10a !== _0x511e6e);
+              console.log("⚠️ 追加任务" + this.taskConfigs[_0x511e6e].name + "奖励过低，移除执行列表");
+            } else {
+              this.normalTaskKeys = this.normalTaskKeys.filter(_0x470a2e => _0x470a2e !== _0x511e6e);
+              console.log("⚠️ 主任务" + this.taskConfigs[_0x511e6e].name + "奖励过低，移除执行列表");
+            }
+            if (this.normalTaskKeys.length + this.extraTaskKeys.length <= 0) {
+              this.stopAllTasks = true;
+            }
+          }
+          if (this.lowRewardStreak >= this.lowRewardLimit) {
+            console.log("🏁 连续" + this.lowRewardLimit + "次低奖励，停止全部任务");
+            this.stopAllTasks = true;
+            this.stopExtraTasks = true;
+          }
+        } else {
+          this.lowRewardStreak = 0;
+        }
         this.taskStats[_0x511e6e].success++;
         this.taskStats[_0x511e6e].totalReward += _0x37f89c;
         return {
@@ -901,18 +973,18 @@ class KuaishouAdTask {
         };
       }
       if ([20107, 20108, 1003, 415].includes(_0x5788ba.result)) {
-        {
-          console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " " + _0x3d0b49.name + " 已达上限");
-          this.taskLimitReached[_0x511e6e] = true;
-          if (_0x511e6e.endsWith("s")) this.extraTaskKeys = this.extraTaskKeys.filter(_0x58a30a => _0x58a30a !== _0x511e6e);else {
-            this.normalTaskKeys = this.normalTaskKeys.filter(_0x55930a => _0x55930a !== _0x511e6e);
-          }
-          this.taskStats[_0x511e6e].failed++;
-          return {
-            "success": false,
-            "reward": 0
-          };
+        console.log("⚠️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " " + _0x3d0b49.name + " 已达上限");
+        this.taskLimitReached[_0x511e6e] = true;
+        if (_0x511e6e.endsWith("s")) {
+          this.extraTaskKeys = this.extraTaskKeys.filter(_0x58a30a => _0x58a30a !== _0x511e6e);
+        } else {
+          this.normalTaskKeys = this.normalTaskKeys.filter(_0x55930a => _0x55930a !== _0x511e6e);
         }
+        this.taskStats[_0x511e6e].failed++;
+        return {
+          "success": false,
+          "reward": 0
+        };
       }
       console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " " + _0x3d0b49.name + " 奖励失败，result=" + _0x5788ba.result + " msg=" + (_0x5788ba.data || ""));
       this.taskStats[_0x511e6e].failed++;
@@ -952,36 +1024,41 @@ class KuaishouAdTask {
   }
   ["deleteApkFile"](_0x24b726) {
     try {
-      _0x24b726 && fs.existsSync(_0x24b726) && (fs.unlinkSync(_0x24b726), console.log("🗑️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 已清理APK文件"));
+      if (_0x24b726 && fs.existsSync(_0x24b726)) {
+        fs.unlinkSync(_0x24b726);
+        console.log("🗑️ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 已清理APK文件");
+      }
     } catch (_0x3310dc) {}
   }
   async ["getSign"](_0x4730de) {
     const _0x1048bd = this.signServiceUrl + "/encsign";
     let _0xf4a442, _0x294d99;
     for (let _0x5bb456 = 0; _0x5bb456 < 3; _0x5bb456++) {
-      {
-        try {
-          ({
-            response: _0xf4a442,
-            body: _0x294d99
-          } = await sendRequest({
-            "method": "POST",
-            "url": _0x1048bd,
-            "body": JSON.stringify({
-              "data": _0x4730de
-            }),
-            "timeout": 30000,
-            "headers": {
-              "Content-Type": "application/json"
-            }
-          }, this.proxyUrl, "getSign"));
-        } catch (_0x3f85e7) {
-          console.log("getSign 请求异常: " + _0x3f85e7.message);
-        }
-        if (_0x294d99 && _0x294d99.data && _0x294d99.data.encdata) break;
+      try {
+        ({
+          response: _0xf4a442,
+          body: _0x294d99
+        } = await sendRequest({
+          "method": "POST",
+          "url": _0x1048bd,
+          "body": JSON.stringify({
+            "data": _0x4730de
+          }),
+          "timeout": 30000,
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }, this.proxyUrl, "getSign"));
+      } catch (_0x3f85e7) {
+        console.log("getSign 请求异常: " + _0x3f85e7.message);
+      }
+      if (_0x294d99 && _0x294d99.data && _0x294d99.data.encdata) {
+        break;
       }
     }
-    if (_0x294d99 && _0x294d99.data && _0x294d99.data.encdata) return _0x294d99.data;
+    if (_0x294d99 && _0x294d99.data && _0x294d99.data.encdata) {
+      return _0x294d99.data;
+    }
     console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " getSign失败，接口返回: " + JSON.stringify(_0x294d99));
     return null;
   }
@@ -1007,35 +1084,51 @@ class KuaishouAdTask {
           }),
           "timeout": 30000
         }, this.proxyUrl, _0x34b6fa + "（签名服务）"));
-        if (_0x9c0232 && _0x9c0232.data && _0x9c0232.data.sig) break;
+        if (_0x9c0232 && _0x9c0232.data && _0x9c0232.data.sig) {
+          break;
+        }
       } catch (_0x26fb03) {
         console.log("requestSignService 请求异常: " + _0x26fb03.message);
       }
     }
-    if (_0x9c0232 && _0x9c0232.data && _0x9c0232.data.sig) return {
-      "sig": _0x9c0232.data.sig,
-      "nssig3": _0x9c0232.data.nssig3,
-      "xfalcon": _0x9c0232.data.xfalcon,
-      "nstokensig": _0x9c0232.data.nstokensig,
-      "kaw": _0x9c0232.data.kaw,
-      "kas": _0x9c0232.data.kas
-    };
+    if (_0x9c0232 && _0x9c0232.data && _0x9c0232.data.sig) {
+      return {
+        "sig": _0x9c0232.data.sig,
+        "nssig3": _0x9c0232.data.nssig3,
+        "xfalcon": _0x9c0232.data.xfalcon,
+        "nstokensig": _0x9c0232.data.nstokensig,
+        "kaw": _0x9c0232.data.kaw,
+        "kas": _0x9c0232.data.kas
+      };
+    }
     console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 签名失败，接口返回: " + JSON.stringify(_0x9c0232));
     return null;
   }
   async ["executeTask"](_0x4e742e) {
     const _0x499362 = this.taskConfigs[_0x4e742e];
-    if (!_0x499362) return console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 未知任务: " + _0x4e742e), false;
-    if (this.taskLimitReached[_0x4e742e]) return false;
+    if (!_0x499362) {
+      console.log("❌ [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 未知任务: " + _0x4e742e);
+      return false;
+    }
+    if (this.taskLimitReached[_0x4e742e]) {
+      return false;
+    }
     let _0x14deba = null;
     try {
       const _0x3dcb7a = await this.retryOperation(() => this.getAdInfo(_0x4e742e, _0x499362), "获取" + _0x499362.name + "信息", 3);
-      if (!_0x3dcb7a) return this.taskStats[_0x4e742e].failed++, false;
+      if (!_0x3dcb7a) {
+        this.taskStats[_0x4e742e].failed++;
+        return false;
+      }
       await simulatePreheat();
       await simulateAdWatch(_0x3dcb7a.estimatedReward);
       await simulateAdClick(_0x3dcb7a);
       const _0x2263cc = await this.retryOperation(() => this.generateSignature(_0x3dcb7a, _0x4e742e, _0x499362), "生成" + _0x499362.name + "签名", 3);
-      if (!_0x2263cc) return this.taskStats[_0x4e742e].failed++, this.deleteApkFile(_0x14deba?.["filePath"]), false;
+      if (!_0x2263cc) {
+        this.taskStats[_0x4e742e].failed++;
+        this.deleteApkFile(_0x14deba?.["filePath"]);
+        return false;
+      }
       const _0x27cb69 = await this.retryOperation(() => this.submitReport(_0x2263cc.sig, _0x2263cc.nssig3, _0x2263cc.xfalcon, _0x2263cc.nstokensig, _0x2263cc.post, _0x4e742e, _0x499362), "提交" + _0x499362.name + "报告", 3);
       this.deleteApkFile(_0x14deba?.["filePath"]);
       return _0x27cb69?.["success"] || false;
@@ -1049,26 +1142,30 @@ class KuaishouAdTask {
   async ["executeAllTasksByPriority"]() {
     console.log("🚀 [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 开始执行主任务");
     for (const _0x4de29f of this.normalTaskKeys) {
-      {
-        if (this.stopAllTasks) break;
-        if (!this.taskConfigs[_0x4de29f]) continue;
-        console.log("🚀 开始主任务：" + this.taskConfigs[_0x4de29f].name);
-        await this.executeTask(_0x4de29f);
+      if (this.stopAllTasks) {
+        break;
       }
+      if (!this.taskConfigs[_0x4de29f]) {
+        continue;
+      }
+      console.log("🚀 开始主任务：" + this.taskConfigs[_0x4de29f].name);
+      await this.executeTask(_0x4de29f);
     }
     console.log("\n🚀 [" + this.versionLabel + "-" + this.nickname + "]" + (this.remark ? "（" + this.remark + "）" : "") + " 开始执行追加任务，目标" + this.maxExtraAdCount + "个");
     while (!this.stopAllTasks && !this.stopExtraTasks && this.extraTaskKeys.length > 0) {
       const _0x1d71f1 = [...this.extraTaskKeys].sort(() => Math.random() - 0.5);
       for (const _0x132006 of _0x1d71f1) {
-        {
-          if (this.stopAllTasks || this.stopExtraTasks) break;
-          if (this.taskLimitReached[_0x132006]) continue;
-          console.log("🚀 开始追加任务：" + this.taskConfigs[_0x132006].name);
-          await this.executeTask(_0x132006);
-          const _0x3fd9aa = Math.floor(Math.random() * 30) + 20;
-          console.log("⏳ 追加任务间隔等待" + _0x3fd9aa + "秒");
-          await new Promise(_0x3969d4 => setTimeout(_0x3969d4, _0x3fd9aa * 1000));
+        if (this.stopAllTasks || this.stopExtraTasks) {
+          break;
         }
+        if (this.taskLimitReached[_0x132006]) {
+          continue;
+        }
+        console.log("🚀 开始追加任务：" + this.taskConfigs[_0x132006].name);
+        await this.executeTask(_0x132006);
+        const _0x3fd9aa = Math.floor(Math.random() * 30) + 20;
+        console.log("⏳ 追加任务间隔等待" + _0x3fd9aa + "秒");
+        await new Promise(_0x3969d4 => setTimeout(_0x3969d4, _0x3fd9aa * 1000));
       }
       await this.checkCoinLimit();
     }
@@ -1078,24 +1175,44 @@ class KuaishouAdTask {
 }
 function parseAccountConfig(_0x1eb677) {
   const _0x249393 = String(_0x1eb677 || "").trim().split("#");
-  if (_0x249393.length < 2) return null;
+  if (_0x249393.length < 2) {
+    return null;
+  }
   let _0x4bf9eb = "",
     _0x4f1f31 = "",
     _0x4a5933 = "",
     _0x404326 = null;
-  if (_0x249393.length === 2) _0x4f1f31 = _0x249393[0], _0x4a5933 = _0x249393[1];else {
-    if (_0x249393.length === 3) /socks5:\/\//i.test(_0x249393[2]) ? (_0x4f1f31 = _0x249393[0], _0x4a5933 = _0x249393[1], _0x404326 = _0x249393[2]) : (_0x4bf9eb = _0x249393[0], _0x4f1f31 = _0x249393[1], _0x4a5933 = _0x249393[2]);else _0x249393.length >= 4 && (_0x4bf9eb = _0x249393[0], _0x4f1f31 = _0x249393[1], _0x4a5933 = _0x249393.slice(2, _0x249393.length - 1).join("#"), _0x404326 = _0x249393[_0x249393.length - 1]);
+  if (_0x249393.length === 2) {
+    _0x4f1f31 = _0x249393[0];
+    _0x4a5933 = _0x249393[1];
+  } else {
+    if (_0x249393.length === 3) {
+      /socks5:\/\//i.test(_0x249393[2]) ? (_0x4f1f31 = _0x249393[0], _0x4a5933 = _0x249393[1], _0x404326 = _0x249393[2]) : (_0x4bf9eb = _0x249393[0], _0x4f1f31 = _0x249393[1], _0x4a5933 = _0x249393[2]);
+    } else {
+      if (_0x249393.length >= 4) {
+        _0x4bf9eb = _0x249393[0];
+        _0x4f1f31 = _0x249393[1];
+        _0x4a5933 = _0x249393.slice(2, _0x249393.length - 1).join("#");
+        _0x404326 = _0x249393[_0x249393.length - 1];
+      }
+    }
   }
   if (_0x404326) {
     if (_0x404326.includes("|")) {
-      {
-        const _0x1652d0 = _0x404326.split("|");
-        if (_0x1652d0.length >= 2) {
-          const [_0x4110a7, _0x2b8bc7, _0x51fb6b, _0x5bfc0a] = _0x1652d0;
-          _0x404326 = "socks5://" + _0x51fb6b + ":" + _0x5bfc0a + "@" + _0x4110a7 + ":" + _0x2b8bc7;
-        } else _0x404326 = null, console.log("⚠️ 代理字段格式错误，忽略：" + _0x404326);
+      const _0x1652d0 = _0x404326.split("|");
+      if (_0x1652d0.length >= 2) {
+        const [_0x4110a7, _0x2b8bc7, _0x51fb6b, _0x5bfc0a] = _0x1652d0;
+        _0x404326 = "socks5://" + _0x51fb6b + ":" + _0x5bfc0a + "@" + _0x4110a7 + ":" + _0x2b8bc7;
+      } else {
+        _0x404326 = null;
+        console.log("⚠️ 代理字段格式错误，忽略：" + _0x404326);
       }
-    } else !/^socks5:\/\//i.test(_0x404326) && (console.log("⚠️ 代理字段不是 socks5:// URL，忽略：" + _0x404326), _0x404326 = null);
+    } else {
+      if (!/^socks5:\/\//i.test(_0x404326)) {
+        console.log("⚠️ 代理字段不是 socks5:// URL，忽略：" + _0x404326);
+        _0x404326 = null;
+      }
+    }
   }
   return {
     "remark": _0x4bf9eb || "",
@@ -1111,7 +1228,9 @@ function loadAccountsFromEnv() {
     const _0x3a15fa = parseAccountConfig(_0x2516ec);
     if (_0x3a15fa) {
       _0x59abb4.push(_0x3a15fa);
-    } else console.log("❌ 账号格式错误：" + _0x2516ec);
+    } else {
+      console.log("❌ 账号格式错误：" + _0x2516ec);
+    }
   }
   _0x59abb4.forEach((_0x31eada, _0x3fff22) => {
     _0x31eada.index = _0x3fff22 + 1;
@@ -1123,16 +1242,16 @@ async function concurrentExecute(_0xe16e9c, _0x1c9394, _0x53b7c2) {
   let _0x46f1b = 0;
   async function _0x5d9156() {
     while (true) {
-      {
-        const _0x342a70 = _0x46f1b++;
-        if (_0x342a70 >= _0xe16e9c.length) return;
-        const _0x123ee7 = _0xe16e9c[_0x342a70];
-        try {
-          _0xba9fa2[_0x342a70] = await _0x53b7c2(_0x123ee7, _0x342a70);
-        } catch (_0x44d4f2) {
-          console.log("❌ 并发执行异常（index=" + (_0x342a70 + 1) + "）：" + _0x44d4f2.message);
-          _0xba9fa2[_0x342a70] = null;
-        }
+      const _0x342a70 = _0x46f1b++;
+      if (_0x342a70 >= _0xe16e9c.length) {
+        return;
+      }
+      const _0x123ee7 = _0xe16e9c[_0x342a70];
+      try {
+        _0xba9fa2[_0x342a70] = await _0x53b7c2(_0x123ee7, _0x342a70);
+      } catch (_0x44d4f2) {
+        console.log("❌ 并发执行异常（index=" + (_0x342a70 + 1) + "）：" + _0x44d4f2.message);
+        _0xba9fa2[_0x342a70] = null;
       }
     }
   }
@@ -1155,14 +1274,18 @@ async function processAccount(_0x3b40a4) {
       _0x22d9bc = _0x3f4822?.["totalCoin"] != null ? _0x3f4822.totalCoin : "未知",
       _0x3695a3 = _0x3f4822?.["totalCash"] != null ? _0x3f4822.totalCash : "未知";
     if (_0x3b40a4.proxyUrl) {
-      {
-        const _0x15efe9 = await testProxyConnectivity(_0x3b40a4.proxyUrl, "代理测试");
-        if (_0x15efe9.ok) console.log("✅ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 登录成功！💰 普通金币: " + _0x86876e + "，💸 余额: " + _0x257255 + "，（极速金币：" + _0x22d9bc + "，余额：" + _0x3695a3 + "）🌐 IP: " + _0x15efe9.ip);else {
-          console.log("❌ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 代理连接失败：" + _0x15efe9.msg);
-        }
+      const _0x15efe9 = await testProxyConnectivity(_0x3b40a4.proxyUrl, "代理测试");
+      if (_0x15efe9.ok) {
+        console.log("✅ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 登录成功！💰 普通金币: " + _0x86876e + "，💸 余额: " + _0x257255 + "，（极速金币：" + _0x22d9bc + "，余额：" + _0x3695a3 + "）🌐 IP: " + _0x15efe9.ip);
+      } else {
+        console.log("❌ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 代理连接失败：" + _0x15efe9.msg);
       }
-    } else console.log("✅ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 登录成功！💰 普通金币: " + _0x86876e + "，💸 余额: " + _0x257255 + "，（极速金币：" + _0x22d9bc + "，余额：" + _0x3695a3 + "）🌐 直连模式");
-  } else console.log("❌ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 基本信息获取失败，继续执行");
+    } else {
+      console.log("✅ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 登录成功！💰 普通金币: " + _0x86876e + "，💸 余额: " + _0x257255 + "，（极速金币：" + _0x22d9bc + "，余额：" + _0x3695a3 + "）🌐 直连模式");
+    }
+  } else {
+    console.log("❌ [" + _0x2d8c62 + "-" + _0x3f6bf5 + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 基本信息获取失败，继续执行");
+  }
   let _0x160d08;
   if (_0x57752a === "KUAISHOU") {
     _0x160d08 = _0x5df70e;
@@ -1182,15 +1305,15 @@ async function processAccount(_0x3b40a4) {
   if (_0x224e8e.coinExceeded) {
     console.log("⚠️ [" + _0x224e8e.versionLabel + "-" + _0x224e8e.nickname + "]" + (_0x3b40a4.remark ? "（" + _0x3b40a4.remark + "）" : "") + " 初始金币已超过阈值，不执行任务");
     let _0xdb4422;
-    if (_0x57752a === "KUAISHOU") _0xdb4422 = await getAccountBasicInfo(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);else {
-      {
-        const _0x411705 = await getNickname(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
-        _0xdb4422 = {
-          "nickname": _0x411705?.["nickname"] || _0x3f6bf5,
-          "totalCoin": _0x411705?.["totalCoin"] ?? null,
-          "allCash": _0x411705?.["totalCash"] ?? null
-        };
-      }
+    if (_0x57752a === "KUAISHOU") {
+      _0xdb4422 = await getAccountBasicInfo(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
+    } else {
+      const _0x411705 = await getNickname(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
+      _0xdb4422 = {
+        "nickname": _0x411705?.["nickname"] || _0x3f6bf5,
+        "totalCoin": _0x411705?.["totalCoin"] ?? null,
+        "allCash": _0x411705?.["totalCash"] ?? null
+      };
     }
     const _0x222301 = _0x160d08?.["totalCoin"] || 0,
       _0x4c2ae5 = _0xdb4422?.["totalCoin"] || 0,
@@ -1214,15 +1337,15 @@ async function processAccount(_0x3b40a4) {
   }
   await _0x224e8e.executeAllTasksByPriority();
   let _0x2c26f0;
-  if (_0x57752a === "KUAISHOU") _0x2c26f0 = await getAccountBasicInfo(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);else {
-    {
-      const _0x31d23c = await getNickname(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
-      _0x2c26f0 = {
-        "nickname": _0x31d23c?.["nickname"] || _0x3f6bf5,
-        "totalCoin": _0x31d23c?.["totalCoin"] ?? null,
-        "allCash": _0x31d23c?.["totalCash"] ?? null
-      };
-    }
+  if (_0x57752a === "KUAISHOU") {
+    _0x2c26f0 = await getAccountBasicInfo(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
+  } else {
+    const _0x31d23c = await getNickname(_0x3b40a4.cookie, _0x3b40a4.proxyUrl, _0x3b40a4.index);
+    _0x2c26f0 = {
+      "nickname": _0x31d23c?.["nickname"] || _0x3f6bf5,
+      "totalCoin": _0x31d23c?.["totalCoin"] ?? null,
+      "allCash": _0x31d23c?.["totalCash"] ?? null
+    };
   }
   const _0x1e6031 = _0x160d08?.["totalCoin"] || 0,
     _0xba2d97 = _0x2c26f0?.["totalCoin"] || 0,
@@ -1247,10 +1370,8 @@ async function processAccount(_0x3b40a4) {
 }
 function printAccountsSummary(_0x1b1181) {
   if (!_0x1b1181.length) {
-    {
-      console.log("\n📊 没有可显示的账号信息。");
-      return;
-    }
+    console.log("\n📊 没有可显示的账号信息。");
+    return;
   }
   const _0x1996f3 = _0x1b1181.reduce((_0x476b53, _0x1e5e40) => _0x476b53 + (parseInt(_0x1e5e40.initialCoin) || 0), 0),
     _0x15759b = _0x1b1181.reduce((_0x48ca73, _0x22b170) => _0x48ca73 + (parseInt(_0x22b170.finalCoin) || 0), 0),
@@ -1337,7 +1458,10 @@ function generateKuaishouDid() {
 }
 async function main() {
   const _0x49177e = await checkScriptVersion();
-  !_0x49177e && (console.log("🚫 版本验证失败，脚本终止执行"), process.exit(1));
+  if (!_0x49177e) {
+    console.log("🚫 版本验证失败，脚本终止执行");
+    process.exit(1);
+  }
   accountConfigs = getAccountConfigsFromEnv();
   accountCount = accountConfigs.length;
   tasksToExecute = getTasksToExecute();
@@ -1354,7 +1478,7 @@ async function main() {
   const _0x2bd3a3 = 2,
     _0x41ab4c = 200,
     _0x39d991 = parseInt(process.env.MAX_CONCURRENCY, 10);
-  maxConcurrency = isNaN(_0x39d991) ? _0x2bd3a3 : Math.min(Math.max(_0x39d991, 1), _0x41ab4c);
+  isNaN(_0x39d991) ? maxConcurrency = _0x2bd3a3 : maxConcurrency = Math.min(Math.max(_0x39d991, 1), _0x41ab4c);
   console.log("📋 任务类型设置：" + tasksToExecute.map(_0x2750b => taskNameMap[_0x2750b] || _0x2750b).join(", "));
   console.log("🔄 主任务执行轮数：" + KSROUNDS + "轮");
   console.log("🎯 追加广告目标数量：" + MAX_EXTRA_AD_COUNT + "个");
@@ -1362,30 +1486,33 @@ async function main() {
   console.log("📋 并发数设置：" + maxConcurrency);
   console.log("✅ 成功加载 " + accountCount + " 个账号");
   console.log("=======");
-  accountCount > _0x41ab4c && (console.log("❌ 错误: 检测到 " + accountCount + " 个账号配置，最多只允许" + _0x41ab4c + "个"), process.exit(1));
+  if (accountCount > _0x41ab4c) {
+    console.log("❌ 错误: 检测到 " + accountCount + " 个账号配置，最多只允许" + _0x41ab4c + "个");
+    process.exit(1);
+  }
   const _0x313a30 = loadAccountsFromEnv();
   console.log("=======");
   console.log("📊 共找到 " + _0x313a30.length + " 个有效账号");
-  if (!_0x313a30.length) process.exit(1);
+  if (!_0x313a30.length) {
+    process.exit(1);
+  }
   const _0x16c270 = [];
   await concurrentExecute(_0x313a30, maxConcurrency, async _0x1351b6 => {
     try {
-      {
-        const _0x402828 = await processAccount(_0x1351b6);
-        _0x16c270.push({
-          "index": _0x1351b6.index,
-          "remark": _0x1351b6.remark || "无备注",
-          "nickname": _0x402828?.["nickname"] || "账号" + _0x1351b6.index,
-          "initialCoin": _0x402828?.["initialCoin"] || 0,
-          "finalCoin": _0x402828?.["finalCoin"] || 0,
-          "coinChange": _0x402828?.["coinChange"] || 0,
-          "initialCash": _0x402828?.["initialCash"] || 0,
-          "finalCash": _0x402828?.["finalCash"] || 0,
-          "cashChange": _0x402828?.["cashChange"] || 0,
-          "stats": _0x402828?.["stats"] || {},
-          "coinLimitExceeded": _0x402828?.["coinLimitExceeded"] || false
-        });
-      }
+      const _0x402828 = await processAccount(_0x1351b6);
+      _0x16c270.push({
+        "index": _0x1351b6.index,
+        "remark": _0x1351b6.remark || "无备注",
+        "nickname": _0x402828?.["nickname"] || "账号" + _0x1351b6.index,
+        "initialCoin": _0x402828?.["initialCoin"] || 0,
+        "finalCoin": _0x402828?.["finalCoin"] || 0,
+        "coinChange": _0x402828?.["coinChange"] || 0,
+        "initialCash": _0x402828?.["initialCash"] || 0,
+        "finalCash": _0x402828?.["finalCash"] || 0,
+        "cashChange": _0x402828?.["cashChange"] || 0,
+        "stats": _0x402828?.["stats"] || {},
+        "coinLimitExceeded": _0x402828?.["coinLimitExceeded"] || false
+      });
     } catch (_0x3f79ce) {
       console.log("❌ [" + _0x1351b6.index + "]" + (_0x1351b6.remark ? "（" + _0x1351b6.remark + "）" : "") + " 执行异常：" + _0x3f79ce.message);
       _0x16c270.push({
