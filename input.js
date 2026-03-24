@@ -6,7 +6,15 @@
 普通：look,look2,food,food2,box,search,dj,smrw,zs
 极速：look，food，box，search，content，follow
   注意，这里的逗号和分号都需要英文的
-  内含破1神秘参数，内部版，禁止外泄
+  最痛不过下划线: 03-24 00:58:37
+FNKaNNVgnMf6PVSjPIW88kgclklQ7KQU
+
+最痛不过下划线: 03-24 00:58:42
+dIpktlm1cryD9jV9bYYO9DSUnqFJE0H3
+
+最痛不过下划线: 03-24 00:59:06
+epxWAQZ0GQXzhntGQ7B8vOsxZPjszk75
+内含破1神秘参数，内部版，禁止外泄
   */
 
 (function (_0x33f817, _0x582553) {
