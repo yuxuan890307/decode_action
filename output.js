@@ -1,4 +1,4 @@
-//Tue Mar 24 2026 11:57:51 GMT+0000 (Coordinated Universal Time)
+//Tue Mar 24 2026 12:03:23 GMT+0000 (Coordinated Universal Time)
 //Base:<url id="cv1cref6o68qmpt26ol0" type="url" status="parsed" title="GitHub - echo094/decode-js: JS混淆代码的AST分析工具 AST analysis tool for obfuscated JS code" wc="2165">https://github.com/echo094/decode-js</url>
 //Modify:<url id="cv1cref6o68qmpt26olg" type="url" status="parsed" title="GitHub - smallfawn/decode_action: 世界上本来不存在加密，加密的人多了，也便成就了解密" wc="741">https://github.com/smallfawn/decode_action</url>
 const querystring = require("querystring");
@@ -904,14 +904,12 @@ function parseAccountConfig(_0xe0927a, _0x1974bd) {
     return null;
   }
   let _0x26b236 = null;
-  let _0x54285c = "本地模式";
   if (_0x4dc5bf && _0x4dc5bf.startsWith("socks5://")) {
     _0x26b236 = _0x4dc5bf;
-    _0x54285c = "代理模式";
   } else {
     _0x4dc5bf && logDev("账号" + _0x1974bd + "代理配置警告", "非Socks5代理：" + _0x4dc5bf + "，将使用本地模式");
   }
-  logUser("加载账号" + _0x1974bd + ": " + (_0x5ed4d3 || "未命名") + " (" + _0x54285c + ")", "success");
+  logUser("加载账号" + _0x1974bd + ": " + (_0x5ed4d3 || "未命名") + " (" + "代理模式" + ")", "success");
   return {
     index: _0x1974bd,
     remark: _0x5ed4d3 || "未命名",
@@ -919,7 +917,7 @@ function parseAccountConfig(_0xe0927a, _0x1974bd) {
     cookie: _0x1dbf4c,
     salt: _0x33a2e6,
     proxyUrl: _0x26b236,
-    runMode: _0x54285c
+    runMode: "代理模式"
   };
 }
 function loadAccountsFromEnv() {
