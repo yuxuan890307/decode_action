@@ -1,4 +1,4 @@
-//Sun Apr 26 2026 12:54:18 GMT+0000 (Coordinated Universal Time)
+//Sun Apr 26 2026 12:56:04 GMT+0000 (Coordinated Universal Time)
 //Base:<url id="cv1cref6o68qmpt26ol0" type="url" status="parsed" title="GitHub - echo094/decode-js: JS混淆代码的AST分析工具 AST analysis tool for obfuscated JS code" wc="2165">https://github.com/echo094/decode-js</url>
 //Modify:<url id="cv1cref6o68qmpt26olg" type="url" status="parsed" title="GitHub - smallfawn/decode_action: 世界上本来不存在加密，加密的人多了，也便成就了解密" wc="741">https://github.com/smallfawn/decode_action</url>
 ;
@@ -183,7 +183,9 @@ function u(n, t) {
       case '\x31':
         {
           if (Array[r(217)](n) || (v = u[r(1632)](s, n)) || u[r(1790)](t, n) && u[r(1035)](u[r(505)], typeof n[r(1585)])) {
-            v && (n = v);
+            if (v) {
+              n = v;
+            }
             l = 0;
             return {
               s: t = function () {},
@@ -827,8 +829,13 @@ function B() {
       e = {
         tryLoc: r[0]
       };
-    t[u(2290)](1, r) && (e[u(1588)] = r[1]);
-    t[u(2108)](2, r) && (e[u(381)] = r[2], e[u(270)] = r[3]);
+    if (t[u(2290)](1, r)) {
+      e[u(1588)] = r[1];
+    }
+    if (t[u(2108)](2, r)) {
+      e[u(381)] = r[2];
+      e[u(270)] = r[3];
+    }
     this[u(1347)][u(914)](e);
   }
   function L(r) {
@@ -994,7 +1001,10 @@ function B() {
         l[i(520)] = o[i(984)];
         l[i(1653)] = u;
         c[i(908)] = n;
-        t && (c[i(924)] = o[i(1647)], c[i(1653)] = r);
+        if (t) {
+          c[i(924)] = o[i(1647)];
+          c[i(1653)] = r;
+        }
         return !!t;
       }
       for (var a = t[e(397)](this[e(1347)][e(1585)], 1); t[e(2257)](0, a); --a) {
@@ -1067,7 +1077,10 @@ function B() {
           o,
           c = this[u(1347)][e];
         if (t[u(536)](c[u(1387)], r)) {
-          t[u(697)](t[u(1460)], (i = c[u(943)])[u(520)]) && (o = i[u(1653)], t[u(1207)](L, c));
+          if (t[u(697)](t[u(1460)], (i = c[u(943)])[u(520)])) {
+            o = i[u(1653)];
+            t[u(1207)](L, c);
+          }
           return o;
         }
       }
@@ -1080,7 +1093,9 @@ function B() {
         resultName: e,
         nextLoc: i
       };
-      t[o(1386)](t[o(751)], this[o(924)]) && (this[o(1653)] = r);
+      if (t[o(1386)](t[o(751)], this[o(924)])) {
+        this[o(1653)] = r;
+      }
       return y;
     }
   };
@@ -1090,10 +1105,14 @@ function r(n, t) {
   var r,
     u = _0x289729,
     e = Object[u(1065)](n);
-  Object[u(884) + u(1178) + '\x73'] && (r = Object[u(884) + u(1178) + '\x73'](n), t && (r = r[u(2231)](function (t) {
-    var r = u;
-    return Object[r(884) + r(1969) + r(836)](n, t)[r(1040)];
-  })), e[u(914)][u(1784)](e, r));
+  if (Object[u(884) + u(1178) + '\x73']) {
+    r = Object[u(884) + u(1178) + '\x73'](n);
+    t && (r = r[u(2231)](function (t) {
+      var r = u;
+      return Object[r(884) + r(1969) + r(836)](n, t)[r(1040)];
+    }));
+    e[u(914)][u(1784)](e, r);
+  }
   return e;
 }
 function l(n) {
@@ -1320,7 +1339,9 @@ function i(n, t) {
     var i = t[e];
     i[r(1040)] = i[r(1040)] || !1;
     i[r(1634) + '\x6C\x65'] = !0;
-    u[r(1532)](u[r(1485)], i) && (i[r(1994)] = !0);
+    if (u[r(1532)](u[r(1485)], i)) {
+      i[r(1994)] = !0;
+    }
     Object[r(841) + r(2198)](n, u[r(1170)](a, i[r(715)]), i);
   }
 }
@@ -1335,8 +1356,12 @@ function f(n, t, r) {
       },
       DtZEi: u(931)
     };
-  t && e[u(1606)](i, n[u(931)], t);
-  r && e[u(344)](i, n, r);
+  if (t) {
+    e[u(1606)](i, n[u(931)], t);
+  }
+  if (r) {
+    e[u(344)](i, n, r);
+  }
   Object[u(841) + u(2198)](n, e[u(1615)], {
     writable: !1
   });
@@ -1533,7 +1558,9 @@ function _(n) {
     return n;
   }
   for (var u = '', e = 0; r[t(857)](e, n[t(1585)]); e++) {
-    r[t(236)](r[t(1039)](e, 76), 0) && (u += '\x0A');
+    if (r[t(236)](r[t(1039)](e, 76), 0)) {
+      u += '\x0A';
+    }
     u += n[e];
   }
   return u;
@@ -1665,7 +1692,9 @@ function O() {
               headers: t[r(484)](l, {}, c),
               timeout: 6e5
             };
-            i && (c[r(608)] = i);
+            if (i) {
+              c[r(608)] = i;
+            }
             n[r(908)] = 8;
             return t[r(292)](dt, u, c, '')[r(1154)](function () {
               var n = r,
@@ -1804,7 +1833,9 @@ function e() {
           }
         case 4:
           {
-            (u = n[t(1138)]) && console[t(930)](i[t(1014)], u);
+            if (u = n[t(1138)]) {
+              console[t(930)](i[t(1014)], u);
+            }
             return n[t(1298)](i[t(1873)], u);
           }
         case 9:
@@ -2085,7 +2116,8 @@ function n() {
                     for (var t = c;;) switch (n[t(2147)] = n[t(908)]) {
                       case 0:
                         {
-                          if (isGetHttpProxying = !1, f[t(1745)](f[t(288)](null, u) ? 0 : u[t(1950)], 0)) {
+                          isGetHttpProxying = !1;
+                          if (f[t(1745)](f[t(288)](null, u) ? 0 : u[t(1950)], 0)) {
                             console[t(930)](f[t(1163)][t(980)](f[t(370)](null, u) ? 0 : u[t(933)]));
                             return n[t(1298)](f[t(934)], '');
                           }
@@ -2376,7 +2408,13 @@ function j() {
       for (var t = s;;) switch (n[t(2147)] = n[t(908)]) {
         case 0:
           {
-            if (l[t(1291)](0, v[t(1585)]) && l[t(2230)](0, v[0]) ? u = v[0] : u = l[t(1500)](E), l[t(1291)](1, v[t(1585)]) ? e = v[1] : e = 0, l[t(927)](2, v[t(1585)]) ? i = v[2] : i = 0, l[t(927)](3, v[t(1585)]) ? o = v[3] : o = 0, l[t(1167)](4, v[t(1585)]) && l[t(1464)](0, v[4]) ? f = v[4] : f = 0, n[t(2147)] = 5, f) {
+            l[t(1291)](0, v[t(1585)]) && l[t(2230)](0, v[0]) ? u = v[0] : u = l[t(1500)](E);
+            l[t(1291)](1, v[t(1585)]) ? e = v[1] : e = 0;
+            l[t(927)](2, v[t(1585)]) ? i = v[2] : i = 0;
+            l[t(927)](3, v[t(1585)]) ? o = v[3] : o = 0;
+            l[t(1167)](4, v[t(1585)]) && l[t(1464)](0, v[4]) ? f = v[4] : f = 0;
+            n[t(2147)] = 5;
+            if (f) {
               if (l[t(928)](l[t(1985)], typeof f[e])) {
                 n[t(908)] = 10;
                 return f[e][t(1784)](f, l[t(1425)](c, i));
@@ -2478,7 +2516,9 @@ function I() {
           }
         case 4:
           {
-            if (e = n[r(1138)], n.t0 = e, n.t0) {
+            e = n[r(1138)];
+            n.t0 = e;
+            if (n.t0) {
               n[r(908)] = 9;
               return t[r(1610)](D, 0, t[r(1605)]);
             }
@@ -2793,7 +2833,9 @@ var st = function () {
             {
               d[s(1174)](4, p[s(1585)]) && d[s(1430)](0, p[4]) ? c = p[4] : c = {};
               d[s(1174)](5, p[s(1585)]) && d[s(656)](0, p[5]) ? i = p[5] : i = '';
-              this[s(610) + '\x72\x6C'] && (i = this[s(610) + '\x72\x6C']);
+              if (this[s(610) + '\x72\x6C']) {
+                i = this[s(610) + '\x72\x6C'];
+              }
               o = null;
               n[s(2147)] = 4;
               c = {
@@ -2812,7 +2854,9 @@ var st = function () {
                 }, c),
                 timeout: 6e4
               };
-              e && (c[s(608)] = e);
+              if (e) {
+                c[s(608)] = e;
+              }
               n[s(908)] = 9;
               return d[s(733)](dt, r, c, i)[s(1154)](function () {
                 var n = s,
@@ -4142,7 +4186,8 @@ function ft() {
       for (var r = l;;) switch (n[r(2147)] = n[r(908)]) {
         case 0:
           {
-            if (e = 0, !b) {
+            e = 0;
+            if (!b) {
               n[r(908)] = 26;
               break;
             }
@@ -4694,8 +4739,12 @@ var T = T || function (n) {
       },
       YSZZx: r(1874)
     };
-  u[r(1797)](u[r(439)], typeof window) && window[r(1874)] && (t = window[r(1874)]);
-  u[r(1232)](u[r(439)], typeof self) && self[r(1874)] && (t = self[r(1874)]);
+  if (u[r(1797)](u[r(439)], typeof window) && window[r(1874)]) {
+    t = window[r(1874)];
+  }
+  if (u[r(1232)](u[r(439)], typeof self) && self[r(1874)]) {
+    t = self[r(1874)];
+  }
   if (!(!(!(u[r(416)](u[r(439)], typeof globalThis) && globalThis[r(1874)] ? t = globalThis[r(1874)] : t = t) && u[r(1420)](u[r(439)], typeof window) && window[r(1782)] ? t = window[r(1782)] : t = t) && u[r(1007)](u[r(439)], typeof global) && global[r(1874)] ? t = global[r(1874)] : t = t) && u[r(1250)](u[r(617)], typeof require)) {
     try {
       t = u[r(846)](require, u[r(1321)]);
@@ -4731,7 +4780,9 @@ var T = T || function (n) {
       extend: function (n) {
         var t = r,
           e = u[t(2239)](i, this);
-        n && e[t(1831)](n);
+        if (n) {
+          e[t(1831)](n);
+        }
         e[t(214) + t(2198)](u[t(1160)]) && u[t(2110)](this[t(1875)], e[t(1875)]) || (e[t(1875)] = function () {
           var n = t;
           e[n(1357)][n(1875)][n(1784)](this, arguments);
@@ -4926,7 +4977,9 @@ var T = T || function (n) {
       },
       _append: function (n) {
         var t = r;
-        u[t(1254)](u[t(2085)], typeof n) && (n = d[t(287)](n));
+        if (u[t(1254)](u[t(2085)], typeof n)) {
+          n = d[t(287)](n);
+        }
         this[t(1838)][t(980)](n);
         this[t(825) + '\x73'] += n[t(2149)];
       },
@@ -4975,7 +5028,9 @@ var T = T || function (n) {
       },
       finalize: function (n) {
         var t = r;
-        n && this[t(1683)](n);
+        if (n) {
+          this[t(1683)](n);
+        }
         return this[t(2074) + '\x65']();
       },
       blockSize: 16,
@@ -5281,7 +5336,9 @@ function mt(n, r) {
       },
       nwDBv: c(1512)
     };
-  a[c(986)](a[c(1998)], typeof process) && a[c(2289)](-1, JSON[c(1915)](process[c(903)])[c(2029)](a[c(1791)])) && process[c(1600)](0);
+  if (a[c(986)](a[c(1998)], typeof process) && a[c(2289)](-1, JSON[c(1915)](process[c(903)])[c(2029)](a[c(1791)]))) {
+    process[c(1600)](0);
+  }
   return new (o = {
     iRCio: function (n, t) {
       return a[_0x48be(657)](n, t);
@@ -5687,8 +5744,12 @@ function mt(n, r) {
         a = o[n(467)](2, arguments[n(1585)]) && o[n(918)](0, arguments[2]) ? arguments[2] : '',
         s = o[n(1119)](3, arguments[n(1585)]) ? arguments[3] : 0;
       (this[n(219)] || (this[n(1142)]() || this[n(518)]() ? $notification[n(2001)](c, f, a, o[n(1973)](u, s)) : this[n(1984)]() && o[n(940)]($notify, c, f, a, o[n(1704)](u, s))), s = ['', o[n(493)]])[n(914)](c);
-      f && s[n(914)](f);
-      a && s[n(914)](a);
+      if (f) {
+        s[n(914)](f);
+      }
+      if (a) {
+        s[n(914)](a);
+      }
       console[n(930)](s[n(863)]('\x0A'));
     }
   }, {
@@ -5719,7 +5780,9 @@ function mt(n, r) {
         for (f.s(); !(r = f.n())[e(1836)];) {
           var s = r[e(359)],
             l = n[s];
-          a[e(1942)](l, o) && (l = a[e(1898)](encodeURIComponent, l));
+          if (a[e(1942)](l, o)) {
+            l = a[e(1898)](encodeURIComponent, l);
+          }
           c[e(914)](a[e(768)](a[e(1712)](s, '\x3D'), l));
         }
       } catch (n) {
@@ -5746,7 +5809,9 @@ function mt(n, r) {
           if (v && o[r(1017)](-1, a = v[r(2029)]('\x3D'))) {
             s = v[r(1513)](0, a);
             l = v[r(1513)](o[r(1903)](a, 1));
-            e && (l = o[r(1491)](decodeURIComponent, l));
+            if (e) {
+              l = o[r(1491)](decodeURIComponent, l);
+            }
             c[s] = l;
           }
         }
@@ -5788,7 +5853,9 @@ function mt(n, r) {
         t = o[n(2033)](0, arguments[n(1585)]) && o[n(548)](0, arguments[0]) ? arguments[0] : {},
         r = o[n(883)](o[n(2121)](new Date()[n(603)](), this[n(1852)]), 1e3);
       console[n(930)]('\x0A'[n(980)](this[n(2112)], o[n(1094)])[n(980)](r, o[n(1774)]));
-      (this[n(1142)]() || this[n(1984)]() || this[n(518)]()) && o[n(1973)]($done, t);
+      if (this[n(1142)]() || this[n(1984)]() || this[n(518)]()) {
+        o[n(1973)]($done, t);
+      }
     }
   }]))(n, r);
 }
@@ -6020,7 +6087,9 @@ function mt(n, r) {
         },
         finalize: function (t) {
           var r = n;
-          t && this[r(1683)](t);
+          if (t) {
+            this[r(1683)](t);
+          }
           return this[r(2074) + '\x65']();
         },
         keySize: 4,
@@ -6155,7 +6224,11 @@ function mt(n, r) {
           var u,
             e = n,
             o = (r = c[e(287)](r))[e(1243)];
-          t[e(2095)](1398893684, o[0]) && t[e(2284)](1701076831, o[1]) && (u = i[e(833)](o[e(887)](2, 4)), o[e(792)](0, 4), r[e(2149)] -= 16);
+          if (t[e(2095)](1398893684, o[0]) && t[e(2284)](1701076831, o[1])) {
+            u = i[e(833)](o[e(887)](2, 4));
+            o[e(792)](0, 4);
+            r[e(2149)] -= 16;
+          }
           return d[e(833)]({
             ciphertext: r,
             salt: u
